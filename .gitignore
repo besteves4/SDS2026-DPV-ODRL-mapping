@@ -1,0 +1,14 @@
+*.abs
+*.aux
+*.bbl
+*.blg
+*.fdb_latexmk
+*.fls
+*.log
+*.out
+*.pdf
+*.pyg
+*.gz
+*.xmpdata
+*.xmpi
+*.DS_Store

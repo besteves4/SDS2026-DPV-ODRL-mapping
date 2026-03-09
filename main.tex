@@ -1,0 +1,114 @@
+\documentclass{ceurart}
+
+\input{reviewing}
+
+\sloppy
+
+\usepackage{listings}
+%% auto break lines
+\lstset{breaklines=true}
+
+% typesetting turtle code
+\usepackage{color}
+\usepackage[listings,skins,breakable,xparse]{tcolorbox}
+\usepackage{footmisc}
+\definecolor{MyLightGray}{rgb}{0.95, 0.95, 0.96}
+
+\lstdefinelanguage{turtle}
+{
+    columns=fullflexible,
+    keywordstyle=\color{red},
+    morekeywords={@prefix,@base,@forSome,@forAll,@keywords},
+    morecomment=[l]{\#},
+    tabsize=4,
+    alsoletter={-?}, % allowed in names
+    morecomment=[s][\color{blue}]{<}{>},
+    basicstyle=\ttfamily\color{black},
+    %numberstyle=\color{black},
+    morestring=[b][\color{black}]\",
+    backgroundcolor=\color{MyLightGray},
+}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{multirow}
+\usepackage{tabularx}
+\usepackage{cleveref}
+\usepackage{wrapfig}
+
+\newtheorem{definition}{Definition}
+\newtheorem{policy}{Policy}
+\newtheorem{sotw}{SotW}
+
+\begin{document}
+
+\copyrightyear{2026}
+\copyrightclause{Copyright for this paper by its authors.
+  Use permitted under Creative Commons License Attribution 4.0
+  International (CC BY 4.0).}
+
+
+\conference{SDS'26}
+
+
+\title{Bridging DPV and ODRL for Legally-Oriented Usage Control in Data Spaces}
+
+\author[1]{Beatriz Esteves}[%
+orcid=0000-0003-0259-7560,
+email=beatriz.esteves@ugent.be,
+url=https://w3id.org/people/besteves,
+]
+\cormark[1]
+\cortext[1]{Corresponding author.}
+
+\author[2]{Harsh}[%
+% orcid=0000-0003-0259-7560,
+% email=beatriz.esteves@ugent.be,
+% url=https://w3id.org/people/besteves,
+]
+
+\address[1]{IDLab, Department of Electronics and Information Systems, Ghent University -- imec, Ghent, Belgium}
+\address[2]{TODO}
+
+\begin{abstract}
+% Context:      Why the need is so pressing or important
+Data spaces increasingly require robust usage control mechanisms to ensure that data sharing complies with legal, contractual, and governance requirements while remaining interoperable across heterogeneous systems. The W3C's ODRL Information Model 2.2 provides a domain-agnostic framework for expressing permissions, prohibitions, and obligations over assets, whereas the Data Privacy Vocabulary (DPV) offers a rich, controlled vocabulary for representing privacy and data protection concepts.
+% Need:         Why something needed to be done at all
+However, the lack of systematic alignment between legal-semantic vocabularies and enforceable policy languages hinders the creation of machine-readable, legally-oriented usage policies in data spaces.
+% Task:         What was undertaken to address the need
+% Object:       What the present document does or covers
+This paper addresses this gap by presenting a structured mapping between DPV and ODRL that aligns DPV concepts with ODRL constructs using RDF and SKOS properties, and that is provided in machine-readable forms to support implementation.
+The mapping covers core correspondences such as DPV entities, processing, data, personal data, legal bases, purposes, technical and organisational measures, and roles (e.g., controller and processor) with ODRL parties, actions, assets, and left operands. 
+% Findings:     What the work done yielded or revealed
+By doing so, it enables the expression of legally grounded policies where DPV supplies semantically precise privacy terms, and ODRL provides the deontic and operational policy structure.
+In addition, we contribute a comprehensive guidance document that specifies how DPV terms should be used within ODRL policies, including best practices for profiles, constraints, and operator usage in accordance with ODRL profiling recommendations. 
+% Conclusion:   What the findings mean for the audience
+% Perspectives: What the future holds, beyond this work
+Together, the mapping and guidance establish a reusable foundation for implementing legally-oriented, interoperable usage control policies in data spaces. They support the creation of policy artefacts that are simultaneously machine-processable, semantically rich, and aligned with data protection and governance requirements, thereby advancing trustworthy and compliant data sharing ecosystems.
+\end{abstract}
+
+\begin{keywords}
+  ODRL \sep
+  DPV \sep
+  usage control \sep
+  regulatory compliance
+\end{keywords}
+
+\maketitle
+
+\input{1-intro}
+\input{2-background}
+\input{3-mapping}
+\input{4-policies}
+\input{5-usage-guidelines}
+\input{6-conclusion}
+
+% \section*{Acknowledgments}
+% This research was funded by SolidLab Vlaanderen (Flemish Government, EWI and RRF project VV023/10) and by the imec.icon project PACSOI (HBC.2023.0752), which was co-financed by imec and VLAIO and brings together the following partners: FAQIR Foundation, FAQIR Institute, MoveUP, Byteflies, AContrario, and Ghent University -- IDLab.
+
+\section*{Declaration on Generative AI}
+During the preparation of this work, the author(s) used Grammarly in order to: Grammar and spelling check. After using this tool/service, the author(s) reviewed and edited the content as needed and take(s) full responsibility for the publication's content.
+
+\bibliography{references}
+
+\end{document}
