@@ -79,7 +79,8 @@ DPV concepts can function within ODRL policies as:
     \item policy types
 \end{inlinelist}.
 Figure~\ref{fig:mapping}
-provides an overview of this mapping for all DPV taxonomies.
+provides an overview of this mapping where all DPV taxonomies
+are mapped into one or more of the previously mentioned ODRL constructs.
 
 \begin{figure}[ht]
     \centering
@@ -210,17 +211,45 @@ that can be employed as assets or as further constraints in ODRL policies.
 For example,
 a policy may specify that a given asset may only be used for training an AI model.
 
+\paragraph{Contextual and Governance-related Constraints}
 
+The majority of DPV taxonomies yet to be discussed in this section
+are mapped as ODRL left operands to further constrain ODRL policies.
+The following list provides an overview of these taxonomies and
+their utility to restrict ODRL policies:
+\begin{itemize}
+    \item \textbf{Purpose:} Purpose limitation is a central principle in many data protection frameworks, particularly the GDPR. DPV includes an extensive taxonomy of purposes, which can be integrated into ODRL policies to constrain data or technology usage to a particular purpose or set of purposes. This alignment enables the expression of policies such as allowing the use of a dataset exclusively for research or restricting its use to statistical analysis.
+    \item \textbf{Technical and Organisational Measures:} Data protection regulations frequently require the implementation of safeguards such as encryption, authentication mechanisms, or organisational controls. DPV models such safeguards as technical and organisational measures (TOMs), which can be used as constraints within ODRL policies for, e.g., permitting access to a dataset only when multi-factor authentication is implemented.
+    \item \textbf{Legal and Jurisdictional Constraints:} DPV location concepts can restrict asset usage to specific locations or jurisdictions, supported by the Location\footnote{\url{https://w3id.org/dpv/loc}} extension that contains concepts to represent countries and regions based on ISO 3166. Additionally, DPV provides concepts for representing applicable laws and legal bases for processing activities, with the Legal\footnote{\url{https://w3id.org/dpv/legal}} extensions supporting the modelling of laws and authorities across jurisdictions.
+    \item \textbf{Time-based Context:} Temporal aspects of policies, including duration and frequency of usage, can also be represented through DPV concepts. These mappings allow policies to define how long data may be used or how often certain operations may occur. Furthermore, these DPV concepts can be related to a few ODRL left operands in a non-hierarchical way, e.g., \texttt{dpv:Duration} is related to \texttt{odrl:elapsedTime}. Listing~\ref{lst:duration} provides the DPV-ODRL mapping for duration, where \texttt{dpv-odrl:Duration}, the equivalent to \texttt{dpv:Duration}, is instantiated as an \texttt{odrl:LeftOperand} and has related ODRL concepts, i.e., \texttt{odrl:elapsedTime} and \texttt{odrl:count}.
+    \item \textbf{Rights and Risks:} DPV includes concepts representing risks, rights, and justifications associated with processing activities. They can be used to justify the exercising of a certain right, e.g., a data subject wants to exercise their right to erasure given that the processing of their personal data is no longer required, or to restrict the use of assets when risk levels exceed certain thresholds.
+    \item \textbf{Sector and Status:} DPV sector concepts can be used to permit or restrict asset usage based on the application domain. The AI Act\footnote{\url{https://w3id.org/dpv/legal/eu/aiact}} extension provides sector-related concepts, such as education and employment, to represent these domains. Additionally, DPV status concepts can indicate the state of processes or activities, enabling policies to constrain asset usage based on conditions such as the status of given consent.
+\end{itemize}
+A detailed list of these mappings
+is available at \url{https://dev.dpvcg.org/mappings/odrl}
+and can be observed in Figure~\ref{fig:mapping}.
 
 \begin{scriptsize}
-\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:HealthcareScientificResearch]
+\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Duration concept.,  label=lst:duration]
 dpv-odrl:Duration a odrl:LeftOperand, skos:Concept ;
     skos:exactMatch dpv:Duration ;
 	skos:related odrl:elapsedTime, odrl:count .
+\end{lstlisting}
+\end{scriptsize}
 
+\paragraph{Rules}
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:rule]
 dpv-odrl:Obligation skos:exactMatch dpv:Obligation ;
 	skos:closeMatch odrl:Duty .
+\end{lstlisting}
+\end{scriptsize}
 
+\paragraph{Agreements}
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:policy]
 dpv-odrl:NDA a rdfs:Class, skos:Concept ;
     skos:exactMatch dpv:NDA ;
 	rdfs:subClassOf odrl:Policy ;
