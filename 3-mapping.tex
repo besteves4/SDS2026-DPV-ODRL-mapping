@@ -237,26 +237,49 @@ dpv-odrl:Duration a odrl:LeftOperand, skos:Concept ;
 \end{lstlisting}
 \end{scriptsize}
 
-\paragraph{Rules}
+\paragraph{Rules and Agreements}
+
+DPV rule concepts align with the core rule types in ODRL.
+Permissions, prohibitions, and obligations
+can therefore be represented consistently across both vocabularies.
+Listing~\ref{lst:rule} provides an example of a
+DPV-ODRL mapping for a rule.
+In this case,
+\texttt{dpv-odrl:Obligation} is equivalent to \texttt{dpv:Obligation},
+and closely matches \texttt{odrl:Duty}.
+Additionally,
+DPV contractual clauses and legal agreements
+can be represented as subclasses of ODRL policies.
+Examples include confidentiality agreements, 
+non-disclosure agreements (NDA), and data handling clauses.
+Listing~\ref{lst:policy} provides
+the DPV-ODRL mapping for the \texttt{NDA} concept.
+In this case,
+\texttt{dpv-odrl:NDA},
+equivalent to \texttt{dpv:NDA},
+is a subclass of \texttt{odrl:Policy},
+and mutually exclusive from all ODRL policies and
+also from those defined in the DPV-ODRL profile.
+The latter condition is a requirement from the 
+ODRL Profile Mechanism
+for the definition of additional policy subclasses.
 
 \begin{scriptsize}
-\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:rule]
+\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Obligation concept., label=lst:rule]
 dpv-odrl:Obligation skos:exactMatch dpv:Obligation ;
 	skos:closeMatch odrl:Duty .
 \end{lstlisting}
 \end{scriptsize}
 
-\paragraph{Agreements}
-
 \begin{scriptsize}
-\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:policy]
+\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the NDA concept., label=lst:policy]
 dpv-odrl:NDA a rdfs:Class, skos:Concept ;
     skos:exactMatch dpv:NDA ;
 	rdfs:subClassOf odrl:Policy ;
 	owl:disjointWith odrl:Agreement, odrl:Offer, odrl:Privacy, odrl:Request, odrl:Ticket, odrl:Assertion,
-	dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
-	dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
-	dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
-	dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
+        dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
+        dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
+        dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
+        dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
 \end{lstlisting}
 \end{scriptsize}
