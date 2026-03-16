@@ -66,7 +66,7 @@ and examples.
 % Disjointment: \texttt{$P_1 \cap P_i = \varnothing \quad \forall i \neq 1$}
 
 \subsection{DPV-ODRL Profile}
-\label{sec:methodology}
+\label{sec:profile}
 
 Through the mapping described in the previous section,
 DPV concepts can function within ODRL policies as:
@@ -87,26 +87,6 @@ provides an overview of this mapping for all DPV taxonomies.
     \caption{Overview of DPV-ODRL mapping: the inner layer groups the terms by taxonomy, the middle layer contains the mapped DPV terms, and the outer layer contains the mapping to ODRL constructs.}
     \label{fig:mapping}
 \end{figure}
-
-\begin{scriptsize}
-\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:HealthcareScientificResearch]
-dpv-odrl:Duration a odrl:LeftOperand, skos:Concept ;
-    skos:exactMatch dpv:Duration ;
-	skos:related odrl:elapsedTime, odrl:count .
-
-dpv-odrl:Obligation skos:exactMatch dpv:Obligation ;
-	skos:closeMatch odrl:Duty .
-
-dpv-odrl:NDA a rdfs:Class, skos:Concept ;
-    skos:exactMatch dpv:NDA ;
-	rdfs:subClassOf odrl:Policy ;
-	owl:disjointWith odrl:Agreement, odrl:Offer, odrl:Privacy, odrl:Request, odrl:Ticket, odrl:Assertion,
-	dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
-	dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
-	dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
-	dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
-\end{lstlisting}
-\end{scriptsize}
 
 \paragraph{Entities and Legal Roles}
 
@@ -148,7 +128,7 @@ dpv-odrl:Recipient a odrl:Party, odrl:LeftOperand, skos:Concept ;
 \end{lstlisting}
 \end{scriptsize}
 
-\subsection{Processing Operations}
+\paragraph{Processing Operations}
 
 DPV processing concepts describe
 operations that may be performed on data,
@@ -159,11 +139,17 @@ permitted, prohibited or mandatory activities within policies.
 Furthermore, 
 a few DPV processing terms closely correspond to existing ODRL actions,
 allowing them to be related using the \texttt{skos:closeMatch}~---~%
-Table~\ref{tab:processing}
-This mapping enables ODRL policies to explicitly represent legally relevant processing activities such as anonymisation or data transfer, which are frequently regulated by data protection legislation.
+Table~\ref{tab:processing} contains an overview of these terms.
+Listing~\ref{lst:action} provides an example of a
+DPV-ODRL mapping for a processing operation.
+In this case,
+\texttt{dpv-odrl:Use},
+the equivalent to \texttt{dpv:Use},
+is instantiated as an \texttt{odrl:Action} and
+has a similar ODRL concept, i.e., \texttt{odrl:use}.
 
 \begin{scriptsize}
-\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Use concept.,  label=lst:action]
+\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Use concept., label=lst:action]
 dpv-odrl:Use a odrl:Action, skos:Concept ;
 	skos:exactMatch dpv:Use ;
 	skos:closeMatch odrl:use .
@@ -172,8 +158,8 @@ dpv-odrl:Use a odrl:Action, skos:Concept ;
 
 \begin{table}[ht]
     \centering
+    \caption{Mapping of DPV processing operations to ODRL actions.}
     \label{tab:processing}
-    \caption{Mapping of Processing Operations}
     \begin{tabular}{lll}
         \toprule
         \textbf{ODRL Concept} & \textbf{DPV Concept} & \textbf{Mapping Type} \\
@@ -193,3 +179,55 @@ dpv-odrl:Use a odrl:Action, skos:Concept ;
     \end{tabular}
 \end{table}
 
+\paragraph{Data and Technologies}
+
+In ODRL,
+assets represent the resources targeted by policies.
+On the other hand,
+DPV provides a comprehensive taxonomy for describing data,
+including categories of personal and non-personal data,
+as well as a Personal Data Categories extension\footnote{
+    \url{https://w3id.org/dpv/pd}},
+which provides additional concepts to represent different types of personal data,
+e.g., social, demographic, financial, or health-related data categories.
+These concepts can therefore be mapped to ODRL assets,
+but can also be used as left operands to refine asset or party collections
+to specific demographic groups, e.g.,
+to restrict the usage of a certain asset to parties which are over 18.
+% TODO: include example in the next section that can be referenced here
+Furthermore,
+DPV provides technology-related concepts
+that can be used to denote the use of any technological resources,
+including AI systems.
+These concepts can also be used as assets within ODRL policies
+to specify conditions governing the use of such resources.
+Furthermore, DPV's Technology\footnote{
+    \url{https://w3id.org/dpv/tech}}
+and AI Technology\footnote{
+    \url{https://w3id.org/dpv/ai}}
+extensions introduce additional technological concepts
+that can be employed as assets or as further constraints in ODRL policies.
+For example,
+a policy may specify that a given asset may only be used for training an AI model.
+
+
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:HealthcareScientificResearch]
+dpv-odrl:Duration a odrl:LeftOperand, skos:Concept ;
+    skos:exactMatch dpv:Duration ;
+	skos:related odrl:elapsedTime, odrl:count .
+
+dpv-odrl:Obligation skos:exactMatch dpv:Obligation ;
+	skos:closeMatch odrl:Duty .
+
+dpv-odrl:NDA a rdfs:Class, skos:Concept ;
+    skos:exactMatch dpv:NDA ;
+	rdfs:subClassOf odrl:Policy ;
+	owl:disjointWith odrl:Agreement, odrl:Offer, odrl:Privacy, odrl:Request, odrl:Ticket, odrl:Assertion,
+	dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
+	dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
+	dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
+	dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
+\end{lstlisting}
+\end{scriptsize}
