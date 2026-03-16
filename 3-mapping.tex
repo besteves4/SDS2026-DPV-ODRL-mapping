@@ -46,9 +46,9 @@ the semantic property used for the mapping,
 and examples.
 
 \begin{table}[ht]
-\centering
-\caption{Mapping types of DPV and ODRL Concepts}
-\label{tab:mapping}
+    \centering
+    \caption{Mapping types of DPV and ODRL Concepts}
+    \label{tab:mapping}
     \begin{tabular}{lll}
         \toprule
         \textbf{Alignment} & \textbf{Mapping Relation} & \textbf{Example} \\
@@ -78,15 +78,15 @@ DPV concepts can function within ODRL policies as:
     \item rules, and
     \item policy types
 \end{inlinelist}.
-Figure 1%~\ref{fig:mapping}
+Figure~\ref{fig:mapping}
 provides an overview of this mapping for all DPV taxonomies.
 
-% \begin{figure}
-%   \centering
-%   \includegraphics[width=.5\linewidth]{overview.pdf}
-%   \caption{}
-%   \label{fig:mapping}
-% \end{figure}
+\begin{figure}[ht]
+    \centering
+    \includegraphics[width=\linewidth]{overview_cropped.pdf}
+    \caption{Overview of DPV-ODRL mapping: the inner layer groups the terms by taxonomy, the middle layer contains the mapped DPV terms, and the outer layer contains the mapping to ODRL constructs.}
+    \label{fig:mapping}
+\end{figure}
 
 \begin{scriptsize}
 \begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:HealthcareScientificResearch]
@@ -158,8 +158,8 @@ can therefore be used to define
 permitted, prohibited or mandatory activities within policies.
 Furthermore, 
 a few DPV processing terms closely correspond to existing ODRL actions,
-allowing them to be related using the \texttt{skos:closeMatch}.
-
+allowing them to be related using the \texttt{skos:closeMatch}~---~%
+Table~\ref{tab:processing}
 This mapping enables ODRL policies to explicitly represent legally relevant processing activities such as anonymisation or data transfer, which are frequently regulated by data protection legislation.
 
 \begin{scriptsize}
@@ -171,24 +171,25 @@ dpv-odrl:Use a odrl:Action, skos:Concept ;
 \end{scriptsize}
 
 \begin{table}[ht]
-\centering
-\caption{Mapping of Processing Operations}
-\begin{tabular}{lll}
-\toprule
-\textbf{ODRL Concept} & \textbf{DPV Concept} & \textbf{Mapping Type} \\
-\midrule
-odrl:acceptTracking & dpv:Tracking & skos:closeMatch \\
-odrl:aggregate & dpv:Aggregate & skos:closeMatch \\
-odrl:anonymize & dpv:Anonymise & skos:closeMatch \\
-odrl:delete & dpv:Delete & skos:closeMatch \\
-odrl:derive & dpv:Derive & skos:closeMatch \\
-odrl:display & dpv:Display & skos:closeMatch \\
-odrl:modify & dpv:Modify & skos:closeMatch \\
-odrl:move & dpv:Move & skos:closeMatch \\
-odrl:transfer & dpv:Transfer & skos:closeMatch \\
-odrl:transform & dpv:Transform & skos:closeMatch \\
-odrl:use & dpv:Use & skos:closeMatch \\
-\bottomrule
-\end{tabular}
+    \centering
+    \label{tab:processing}
+    \caption{Mapping of Processing Operations}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{ODRL Concept} & \textbf{DPV Concept} & \textbf{Mapping Type} \\
+        \midrule
+        odrl:acceptTracking & dpv:Tracking & skos:closeMatch \\
+        odrl:aggregate & dpv:Aggregate & skos:closeMatch \\
+        odrl:anonymize & dpv:Anonymise & skos:closeMatch \\
+        odrl:delete & dpv:Delete & skos:closeMatch \\
+        odrl:derive & dpv:Derive & skos:closeMatch \\
+        odrl:display & dpv:Display & skos:closeMatch \\
+        odrl:modify & dpv:Modify & skos:closeMatch \\
+        odrl:move & dpv:Move & skos:closeMatch \\
+        odrl:transfer & dpv:Transfer & skos:closeMatch \\
+        odrl:transform & dpv:Transform & skos:closeMatch \\
+        odrl:use & dpv:Use & skos:closeMatch \\
+        \bottomrule
+    \end{tabular}
 \end{table}
 
