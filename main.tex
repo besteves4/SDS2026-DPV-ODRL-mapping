@@ -35,6 +35,13 @@
 \usepackage{tabularx}
 \usepackage{cleveref}
 \usepackage{wrapfig}
+\usepackage{hyperref}
+\usepackage[inline]{enumitem}
+\setlist{nolistsep}
+\newlist{inlinelist}{enumerate*}{1}
+\setlist[inlinelist,1]{label=\textit{\roman*)}}
+\newlist{inlineabc}{enumerate*}{1}
+\setlist[inlineabc,1]{label=\textit{\alph*)}}
 
 \newtheorem{definition}{Definition}
 \newtheorem{policy}{Policy}
@@ -76,15 +83,16 @@ Data spaces increasingly require robust usage control mechanisms to ensure that 
 % Need:         Why something needed to be done at all
 However, the lack of systematic alignment between legal-semantic vocabularies and enforceable policy languages hinders the creation of machine-readable, legally-oriented usage policies in data spaces.
 % Task:         What was undertaken to address the need
+This paper addresses this gap by presenting a structured mapping between DPV and ODRL that aligns DPV concepts with ODRL constructs using RDF and SKOS properties, and provides it in a machine-readable form to support implementation.
 % Object:       What the present document does or covers
-This paper addresses this gap by presenting a structured mapping between DPV and ODRL that aligns DPV concepts with ODRL constructs using RDF and SKOS properties, and that is provided in machine-readable forms to support implementation.
-The mapping covers core correspondences such as DPV entities, processing, data, personal data, legal bases, purposes, technical and organisational measures, and roles (e.g., controller and processor) with ODRL parties, actions, assets, and left operands. 
+The mapping covers core correspondences such as DPV entities, processing, data, personal data, legal bases, purposes, technical and organisational measures, and risks, with ODRL parties, actions, assets, and left operands. 
 % Findings:     What the work done yielded or revealed
-By doing so, it enables the expression of legally grounded policies where DPV supplies semantically precise privacy terms, and ODRL provides the deontic and operational policy structure.
-In addition, we contribute a comprehensive guidance document that specifies how DPV terms should be used within ODRL policies, including best practices for profiles, constraints, and operator usage in accordance with ODRL profiling recommendations. 
+By doing so, it enables the expression of legally grounded policies where DPV supplies semantically precise data protection terms, and ODRL provides the deontic and operational policy structure.
+In addition, we contribute a comprehensive guidance document that specifies how DPV terms should be used within ODRL policies, including examples for constraints modelling and operator usage in accordance with ODRL profile best practices. 
 % Conclusion:   What the findings mean for the audience
-% Perspectives: What the future holds, beyond this work
 Together, the mapping and guidance establish a reusable foundation for implementing legally-oriented, interoperable usage control policies in data spaces. They support the creation of policy artefacts that are simultaneously machine-processable, semantically rich, and aligned with data protection and governance requirements, thereby advancing trustworthy and compliant data sharing ecosystems.
+% Perspectives: What the future holds, beyond this work
+TODO: add sentences on future work on implementing mapping in policy engine
 \end{abstract}
 
 \begin{keywords}
@@ -99,7 +107,7 @@ Together, the mapping and guidance establish a reusable foundation for implement
 \input{1-intro}
 \input{2-background}
 \input{3-mapping}
-\input{4-policies}
+% \input{4-policies}
 \input{5-usage-guidelines}
 \input{6-conclusion}
 

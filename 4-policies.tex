@@ -3,22 +3,3 @@
 
 This section outlines ...
 
-\subsection{Legal Agreement}
-\label{sec:catalog}
-
-\begin{scriptsize}
-\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:HealthcareScientificResearch]
-@PREFIX eu-ehds: <https://w3id.org/dpv/legal/eu/ehds#>
-
-<http://example.org/policy/sec-use-research> a odrl:Set ;
-    odrl:uid <http://example.org/policy/sec-use-research> ;
-    odrl:permission [
-        odrl:action odrl:read ;
-        odrl:target eu-ehds:ElectronicHealthData ;
-        odrl:assigner <http://example.org/party/alice>  ;
-        odrl:constraint [
-            odrl:leftOperand dpv-odrl:Purpose ;
-            odrl:operator odrl:isAnyOf ;
-            odrl:rightOperand eu-ehds:HealthcareScientificResearch, eu-ehds:hhhhh, ... ] ] .
-\end{lstlisting}
-\end{scriptsize}

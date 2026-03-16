@@ -1,2 +1,194 @@
-\section{Mapping}
+\section{Mapping from DPV to ODRL}
 \label{sec:mapping}
+
+The DPV-ODRL mapping described in this paper
+is being developed as part of the W3C DPVCG's activities\footnote{
+    \href{https://www.w3.org/groups/cg/dpvcg/}{DPVCG's} mission is to develop vocabularies
+    that support the implementation of regulations,
+    standards, and approaches relevant to privacy and data protection,
+    and how these are addressed in technologies, including AI.},
+with the support of the W3C ODRL CG\footnote{
+    \url{https://www.w3.org/groups/cg/odrl/}},
+and it is available at \url{https://dev.dpvcg.org/mappings/odrl},
+with \texttt{dpv-odrl} as the suggested prefix.
+Furthermore,
+this mapping is represented in an RDF format,
+as an ODRL profile,
+following the best practices documented in the
+ODRL V2.2 Profile Best Practices report~\cite{steidl_odrl_2023}. 
+This ensures compatibility with existing ODRL implementations
+and policy evaluation mechanisms.
+
+\subsection{Methodology}
+\label{sec:methodology}
+
+The mapping between DPV and ODRL is implemented
+using semantic alignment mechanisms,
+primarily through relations from the SKOS vocabulary\footnote{
+    \url{http://www.w3.org/2004/02/skos/core\#}},
+RDF and RDFS\footnote{
+    \url{http://www.w3.org/1999/02/22-rdf-syntax-ns\#} and
+    \url{http://www.w3.org/2000/01/rdf-schema\#}}, and
+OWL\footnote{
+    \url{http://www.w3.org/2002/07/owl\#}}.
+The following alignment strategies were considered:
+\begin{itemize}
+    \item \textbf{Instantiation}: A \texttt{dpv-odrl} class is instantiated as an ODRL class
+    \item \textbf{Specialisation}: One concept is more specific than the other
+    \item \textbf{Hierarchy}: A strict ontology subclass relationship
+    \item \textbf{Equivalence}: Concepts represent the same meaning
+    \item \textbf{Approximation}: Concepts are very similar but not strictly equivalent
+    \item \textbf{Association}: Concepts are related but not hierarchically
+    \item \textbf{Disjointness}: Mutually exclusive concepts
+\end{itemize}
+Table~\ref{tab:mapping} provides an overview of these strategies,
+the semantic property used for the mapping,
+and examples.
+
+\begin{table}[ht]
+\centering
+\caption{Mapping types of DPV and ODRL Concepts}
+\label{tab:mapping}
+    \begin{tabular}{lll}
+        \toprule
+        \textbf{Alignment} & \textbf{Mapping Relation} & \textbf{Example} \\
+        \midrule
+        Instantiation & \texttt{rdf:type} & \texttt{dpv-odrl:Entity rdf:type odrl:Party .} \\
+        Specialisation & \texttt{skos:broader} & \texttt{dpv-odrl:Recipient skos:broader odrl:recipient .} \\
+        Hierarchy & \texttt{rdfs:subClassOf} & \texttt{dpv-odrl:NDA rdfs:subClassOf odrl:Policy .} \\
+        Equivalence & \texttt{skos:exactMatch} & \texttt{dpv-odrl:Agent skos:exactMatch dpv:Agent .} \\
+        Approximation & \texttt{skos:closeMatch} & \texttt{dpv-odrl:Use skos:closeMatch odrl:use .} \\
+        Association & \texttt{skos:related} & \texttt{dpv-odrl:Duration skos:related odrl:elapsedTime .} \\
+        Disjointness & \texttt{owl:disjointWith} & \texttt{dpv-odrl:NDA owl:disjointWith (odrl:Offer, ...) .} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+% Disjointment: \texttt{$P_1 \cap P_i = \varnothing \quad \forall i \neq 1$}
+
+\subsection{DPV-ODRL Profile}
+\label{sec:methodology}
+
+Through the mapping described in the previous section,
+DPV concepts can function within ODRL policies as:
+\begin{inlinelist}
+    \item parties,
+    \item actions,
+    \item assets,
+    \item left operands,
+    \item rules, and
+    \item policy types
+\end{inlinelist}.
+Figure 1%~\ref{fig:mapping}
+provides an overview of this mapping for all DPV taxonomies.
+
+% \begin{figure}
+%   \centering
+%   \includegraphics[width=.5\linewidth]{overview.pdf}
+%   \caption{}
+%   \label{fig:mapping}
+% \end{figure}
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Secondary use policy for purposes associated with healthcare scientific research.,  label=lst:HealthcareScientificResearch]
+dpv-odrl:Duration a odrl:LeftOperand, skos:Concept ;
+    skos:exactMatch dpv:Duration ;
+	skos:related odrl:elapsedTime, odrl:count .
+
+dpv-odrl:Obligation skos:exactMatch dpv:Obligation ;
+	skos:closeMatch odrl:Duty .
+
+dpv-odrl:NDA a rdfs:Class, skos:Concept ;
+    skos:exactMatch dpv:NDA ;
+	rdfs:subClassOf odrl:Policy ;
+	owl:disjointWith odrl:Agreement, odrl:Offer, odrl:Privacy, odrl:Request, odrl:Ticket, odrl:Assertion,
+	dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
+	dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
+	dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
+	dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
+\end{lstlisting}
+\end{scriptsize}
+
+\paragraph{Entities and Legal Roles}
+
+DPV defines entities and legal roles
+representing stakeholders involved in data processing activities,
+such as individuals, organisations, institutions, or authorities.
+As such,
+they can be mapped as \texttt{odrl:Party} instances
+and used as \texttt{odrl:assigner} or \texttt{odrl:assignee} of ODRL policies.
+Furthermore,
+due to the hierarchical structure of DPV,
+certain entity concepts can be used as
+left operands to filter ODRL party collections.
+For example,
+when a party collection contains multiple human subjects of different types,
+the use of \texttt{dpv-odrl:HumanSubject} as the left operand
+and \texttt{dpv:Patient} as the right operand
+enables the specification of an ODRL policy
+that applies exclusively to subjects of this particular type.
+Listing~\ref{lst:entity} provides an example of a
+DPV-ODRL mapping for entity concepts.
+In this case,
+\texttt{dpv-odrl:Recipient},
+the equivalent to \texttt{dpv:Recipient},
+is instantiated
+as a \texttt{odrl:Party} and as a \texttt{odrl:LeftOperand},
+and has a narrower scope than \texttt{odrl:recipient},
+i.e., the right operand of \texttt{odrl:recipient}
+is not restricted to a particular vocabulary,
+while \texttt{dpv-odrl:Recipient} should require
+a \texttt{dpv:Entity} as the right operand.
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Recipient concept., label=lst:entity]
+dpv-odrl:Recipient a odrl:Party, odrl:LeftOperand, skos:Concept ;
+	skos:exactMatch dpv:Recipient ;
+	skos:broader odrl:recipient .
+    # add scope, e.g., which operators and right operand should be used
+\end{lstlisting}
+\end{scriptsize}
+
+\subsection{Processing Operations}
+
+DPV processing concepts describe
+operations that may be performed on data,
+such as aggregation, deletion, transformation, or transfer.
+These operations naturally correspond to ODRL actions and
+can therefore be used to define
+permitted, prohibited or mandatory activities within policies.
+Furthermore, 
+a few DPV processing terms closely correspond to existing ODRL actions,
+allowing them to be related using the \texttt{skos:closeMatch}.
+
+This mapping enables ODRL policies to explicitly represent legally relevant processing activities such as anonymisation or data transfer, which are frequently regulated by data protection legislation.
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Use concept.,  label=lst:action]
+dpv-odrl:Use a odrl:Action, skos:Concept ;
+	skos:exactMatch dpv:Use ;
+	skos:closeMatch odrl:use .
+\end{lstlisting}
+\end{scriptsize}
+
+\begin{table}[ht]
+\centering
+\caption{Mapping of Processing Operations}
+\begin{tabular}{lll}
+\toprule
+\textbf{ODRL Concept} & \textbf{DPV Concept} & \textbf{Mapping Type} \\
+\midrule
+odrl:acceptTracking & dpv:Tracking & skos:closeMatch \\
+odrl:aggregate & dpv:Aggregate & skos:closeMatch \\
+odrl:anonymize & dpv:Anonymise & skos:closeMatch \\
+odrl:delete & dpv:Delete & skos:closeMatch \\
+odrl:derive & dpv:Derive & skos:closeMatch \\
+odrl:display & dpv:Display & skos:closeMatch \\
+odrl:modify & dpv:Modify & skos:closeMatch \\
+odrl:move & dpv:Move & skos:closeMatch \\
+odrl:transfer & dpv:Transfer & skos:closeMatch \\
+odrl:transform & dpv:Transform & skos:closeMatch \\
+odrl:use & dpv:Use & skos:closeMatch \\
+\bottomrule
+\end{tabular}
+\end{table}
+

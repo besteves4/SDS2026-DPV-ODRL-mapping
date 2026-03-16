@@ -1,2 +1,119 @@
 \section{Introduction}
 \label{sec:intro}
+
+At the centre of European Commission's policy agenda,
+Data spaces are emerging as a societal, legal and technical architectural paradigm,
+for enabling trusted data sharing across organisational
+and sectoral boundaries~\cite{farrell_european_2023}.
+Their objective is to allow participants
+to exchange and reuse data while maintaining control over
+how that data is accessed and processed.
+Achieving this balance between
+data sharing and data sovereignty
+requires usage control mechanisms
+that can express and enforce the conditions
+under which data may be used~\cite{eitel_usage_2021}.
+These conditions can be derived not only from technical
+but also from regulatory and contractual requirements.
+In this context,
+the Data Spaces Support Centre (DSSC) blueprint~\cite{data_spaces_support_centre_summary_2026}
+highlights the importance of integrating legal and technical capabilities,
+specifically addressing \emph{regulatory compliance and contractual frameworks}
+alongside \emph{access and usage policies enforcement}.
+These building blocks together aim to ensure that
+the rights and obligations governing data sharing can be
+defined, negotiated, and enforced in an interoperable manner.
+Agreements between data providers and data consumers
+must therefore be represented in a way that
+supports automated interpretation, negotiation,
+and enforcement during the lifecycle of data transactions.
+
+A central challenge in this context
+is the representation of such agreements
+while preserving their legal meaning.
+Data sharing policies must capture
+permissions, prohibitions, and obligations
+governing data access and usage,
+while also reflecting constraints
+derived from sectoral rules, 
+contract law and intellectual property rights,
+or data-related legislation.
+At the same time,
+these policies must be semantically interoperable
+to support the federated nature of data spaces,
+ensuring ``that data can be accurately and
+consistently interpreted and used by
+different people and systems''~\cite{steinbuss_semantic_2025}.
+Two complementary semantic specifications provide
+a promising foundation for addressing this challenge.
+The W3C Open Digital Rights Language (ODRL) standard~\cite{iannella_odrl_2018}
+provides a general-purpose policy model
+for expressing rules
+governing the use of digital assets,
+including permissions, prohibitions, and obligations
+which can be further restricted with contextual constraints.
+Furthermore,
+ODRL is recommended in the DSSC blueprint
+as a standard representation for machine-readable
+access and usage policies within data spaces.
+While ODRL provides the structural framework for policy representation,
+it intentionally remains domain- and jurisdiction-agnostic and
+does not include explicit concepts related to legal compliance.
+The Data Privacy Vocabulary (DPV)~\cite{pandit_data_2024}
+complements ODRL by providing a rich semantic vocabulary
+containing taxonomies to describe legal requirements
+related to data and AI regulation.
+Combining these two standards
+makes it possible to bridge the gap between
+legally grounded governance requirements and
+machine-readable policy enforcement mechanisms.
+By mapping DPV concepts to ODRL constructs,
+policies can express legally meaningful constraints
+while remaining compatible with existing policy evaluation and enforcement engines.
+This approach aligns closely with
+the DSSC blueprint's vision of interoperable data spaces
+where legal agreements and
+technical enforcement mechanisms
+are coherently connected.
+
+In this paper,
+we argue that ODRL and DPV together
+provide a suitable semantic foundation
+for legally-aligned policy expression in data spaces.
+We propose treating ODRL as the core policy framework
+for representing permissions, prohibitions, and
+obligations governing data usage,
+while using DPV as the semantic layer
+for modelling legal and governance concepts
+referenced within those policies.
+To support this integration,
+we present a structured mapping between DPV and ODRL
+that aligns DPV concepts with ODRL constructs,
+using RDF and SKOS properties,
+and provides the mapping in a machine-readable form
+to facilitate implementation,
+in accordance with ODRL profiling best practices~\cite{steidl_odrl_2023}.
+The mapping covers core correspondences such as
+DPV entities, processing operations,
+data and personal data categories,
+legal bases, purposes, and
+the corresponding ODRL constructs
+such as parties, actions, assets, and left operands.
+In addition,
+we provide a guidance document for the use of
+DPV terms within ODRL policies,
+including examples of policies that use the developed mapping.
+Together,
+these contributions enable data space participants
+to express governance rules that are both legally meaningful
+and technically enforceable,
+thereby supporting scalable and
+interoperable policy management
+across data space infrastructures.
+
+The remainder of this article is structured as follows:
+Section~\ref{sec:background} describes overview of existing work for data protection-aligned policy modelling.
+Section~\ref{sec:mapping} provides ...
+% In Section~\ref{sec:policies}, we define a specification for ...
+In Section~\ref{sec:guidelines}, we define a specification for ...
+Finally, Section~\ref{sec:conclusions} concludes the paper and provides pointers to future research.
