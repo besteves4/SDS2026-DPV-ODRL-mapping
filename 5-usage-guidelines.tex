@@ -1,5 +1,115 @@
 \section{Usage Guidelines}
 \label{sec:guidelines}
 
-\subsection{SHACL shapes for DPV-ODRL mapping}
+In addition to the DPV-ODRL mapping
+described in the previous section,
+we provide a guidance document 
+at \url{https://dev.dpvcg.org/guides/dpv-odrl}
+with examples of ODRL policies that use the developed mapping
+and conform with the ODRL standard.
+In this section,
+we reproduce a few of these examples to 
+showcase the usefulness of this work
+to tackle legal compliance enforcement
+in data spaces.
+
+Listing~\ref{lst:partycollection}
+provides an example of a DPV-ODRL policy,
+where a data holder allows the usage of a certain asset,
+i.e., \texttt{ex:research-dataset},
+only for the purpose of
+\texttt{dpv:ResearchAndDevelopment}
+and only for data users which are classified as 
+\texttt{dpv:AcademicScientificOrganisation}.
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Purpose-restricted agreement with a party collection refinement., label=lst:partycollection]
+ex:policy-partycollection a odrl:Agreement ;
+    odrl:uid ex:policy-partycollection ;
+    odrl:profile dpv-odrl: ;
+    odrl:permission [
+        odrl:assigner ex:data-holder ;
+        odrl:assignee [ 
+            a odrl:PartyCollection ;
+            odrl:source ex:entities ;
+            odrl:refinement [
+                odrl:leftOperand dpv-odrl:Entity ;
+                odrl:operator odrl:isA ;
+                odrl:rightOperand dpv:AcademicScientificOrganisation ] ] ;
+        odrl:target ex:research-dataset ;
+        odrl:action dpv-odrl:Use ;
+        odrl:constraint [
+            odrl:leftOperand dpv-odrl:Purpose ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand dpv:ResearchAndDevelopment ] ] .
+\end{lstlisting}
+\end{scriptsize}
+
+Listing~\ref{lst:assetcollection}
+provides an example of a DPV-ODRL policy,
+where a data subject allows the usage of elements
+of a certain asset collection,
+i.e., \texttt{ex:data-catalog},
+that are instances of health record data,
+i.e., \texttt{pd:HealthRecord}.
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Policy with a DPV-ODRL-based asset collection refinement on personal data type., label=lst:assetcollection]
+ex:policy-assetcollection a odrl:Policy ;
+    odrl:uid ex:policy-assetcollection ;
+    odrl:profile dpv-odrl: ;
+    odrl:permission [
+        odrl:target [ 
+            a odrl:AssetCollection ;
+            odrl:source ex:data-catalog ;
+            odrl:refinement [
+                odrl:leftOperand dpv-odrl:PersonalData ;
+                odrl:operator odrl:isA ;
+                odrl:rightOperand pd:HealthRecord ]] ;
+        odrl:assigner ex:data-subject ;
+        odrl:action dpv-odrl:Use ] .
+\end{lstlisting}
+\end{scriptsize}
+
+Listing~\ref{lst:righterasure} contains an
+example specifying an agreement between
+a data subject and
+a data controller,
+where the data controller has the obligation
+to delete the data subject data,
+given that the latter exercised their
+GDPR right to erasure, i.e., \texttt{eu-gdpr:A17},
+supported by a non-necessity justification,
+i.e., \texttt{eu-gdpr:JustificationA17NonNecessity},
+which can be used in such a request
+when the involved personal data is no longer necessary
+in relation to the purposes for which it was initially collected
+or otherwise processed.
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Obligation-based policy for the exercising of a right and related justification., label=lst:righterasure]
+ex:policy-right-erasure-justification a odrl:Agreement ;
+    odrl:uid ex:policy-right-erasure-justification ;
+    odrl:profile dpv-odrl: ;
+    odrl:obligation [
+        odrl:assigner ex:subject ;
+        odrl:assignee ex:controller ;
+        odrl:target ex:subject-data ;
+        odrl:action dpv-odrl:Delete ;
+        odrl:constraint [
+            odrl:leftOperand dpv-odrl:Right ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand eu-gdpr:A17 ], [
+            odrl:leftOperand dpv-odrl:Justification ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand eu-gdpr:JustificationA17NonNecessity ] ] .
+\end{lstlisting}
+\end{scriptsize}
+
+Finally,
+we provide a policy catalog at
+\url{https://github.com/besteves4/SDS2026-DPV-ODRL-mapping}
+that contains an example policy for each mapped left operand.
+
+\subsection{SHACL shapes to validate mapping}
 \label{sec:shacl}
