@@ -6,16 +6,14 @@
 @prefix pd: <https://w3id.org/dpv/pd#> .
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 
-ex:policy-pd-partycollection a odrl:Policy ;
-    odrl:uid ex:policy-pd-partycollection ;
+ex:policy-datasource a odrl:Policy ;
+    odrl:uid ex:policy-datasource ;
     odrl:profile dpv-odrl: ;
     odrl:permission [
-        odrl:assigner [ 
-            a odrl:PartyCollection ;
-            odrl:source ex:entities ;
-            odrl:refinement [
-                odrl:leftOperand dpv-odrl:Age ;
-                odrl:operator odrl:gt ;
-                odrl:rightOperand "18"^^xsd:integer ] ] ;
         odrl:target ex:asset ;
-        odrl:action dpv-odrl:Use ] .
+        odrl:assigner ex:entity ;
+        odrl:action dpv-odrl:Use ;
+        odrl:constraint [
+            odrl:leftOperand dpv-odrl:DataSource ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand dpv:PublicDataSource ] ] .

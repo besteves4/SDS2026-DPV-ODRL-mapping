@@ -4,22 +4,23 @@
 @prefix odrl: <http://www.w3.org/ns/odrl/2/>.
 @prefix dpv: <https://w3id.org/dpv#> .
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix eu-aiact: <https://w3id.org/dpv/legal/eu/aiact#> .
 
-ex:policy-partycollection a odrl:Policy ;
-    odrl:uid ex:policy-partycollection ;
+ex:policy-actor a odrl:Policy ;
+    odrl:uid ex:policy-actor ;
     odrl:profile dpv-odrl: ;
     odrl:permission [
         odrl:assigner ex:DataSubject ;
         odrl:assignee [ 
             a odrl:PartyCollection ;
-            odrl:source ex:entities ;
+            odrl:source ex:actors ;
             odrl:refinement [
-                odrl:leftOperand dpv-odrl:Entity ;
+                odrl:leftOperand dpv-odrl:Actor ;
                 odrl:operator odrl:isA ;
-                odrl:rightOperand dpv:AcademicScientificOrganisation ] ] ;
+                odrl:rightOperand eu-aiact:HumanOverseer ] ] ;
         odrl:target ex:asset ;
         odrl:action dpv-odrl:Use ;
         odrl:constraint [
-            odrl:leftOperand dpv-odrl:Purpose ;
-            odrl:operator odrl:isA ;
-            odrl:rightOperand dpv:PaymentManagement ] ] .
+            odrl:leftOperand dpv-odrl:HumanInvolvement ;
+            odrl:operator odrl:eq ;
+            odrl:rightOperand dpv:HumanInvolvementForOversight ] ] .

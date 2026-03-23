@@ -6,8 +6,8 @@
 @prefix pd: <https://w3id.org/dpv/pd#> .
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 
-ex:policy-assetcollection a odrl:Policy ;
-    odrl:uid ex:policy-assetcollection ;
+ex:policy-personaldata a odrl:Policy ;
+    odrl:uid ex:policy-personaldata ;
     odrl:profile dpv-odrl: ;
     odrl:permission [
         odrl:target [ 

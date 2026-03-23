@@ -3,10 +3,11 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix odrl: <http://www.w3.org/ns/odrl/2/>.
 @prefix dpv: <https://w3id.org/dpv#> .
+@prefix pd: <https://w3id.org/dpv/pd#> .
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
 
-ex:policy-partycollection a odrl:Policy ;
-    odrl:uid ex:policy-partycollection ;
+ex:policy-gender a odrl:Policy ;
+    odrl:uid ex:policy-gender ;
     odrl:profile dpv-odrl: ;
     odrl:permission [
         odrl:assigner ex:DataSubject ;
@@ -14,12 +15,8 @@ ex:policy-partycollection a odrl:Policy ;
             a odrl:PartyCollection ;
             odrl:source ex:entities ;
             odrl:refinement [
-                odrl:leftOperand dpv-odrl:Entity ;
-                odrl:operator odrl:isA ;
-                odrl:rightOperand dpv:AcademicScientificOrganisation ] ] ;
+                odrl:leftOperand dpv-odrl:Gender ;
+                odrl:operator odrl:eq ;
+                odrl:rightOperand "Female"^^xsd:string ] ] ;
         odrl:target ex:asset ;
-        odrl:action dpv-odrl:Use ;
-        odrl:constraint [
-            odrl:leftOperand dpv-odrl:Purpose ;
-            odrl:operator odrl:isA ;
-            odrl:rightOperand dpv:PaymentManagement ] ] .
+        odrl:action dpv-odrl:Use ] .

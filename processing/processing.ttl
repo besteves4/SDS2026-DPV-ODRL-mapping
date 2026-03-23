@@ -9,7 +9,7 @@ ex:policy-processing a odrl:Policy ;
     odrl:uid ex:policy-processing ;
     odrl:profile dpv-odrl: ;
     odrl:permission [
-        odrl:assigner ex:DataController ;
+        odrl:assignee ex:DataController ;
         odrl:target ex:asset ;
         odrl:action dpv-odrl:Anonymise ] .
 

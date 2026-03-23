@@ -4,9 +4,10 @@
 @prefix odrl: <http://www.w3.org/ns/odrl/2/>.
 @prefix dpv: <https://w3id.org/dpv#> .
 @prefix dpv-odrl: <https://w3id.org/dpv/mappings/odrl#> .
+@prefix eu-dga: <https://w3id.org/dpv/legal/eu/dga#> .
 
-ex:policy-partycollection a odrl:Policy ;
-    odrl:uid ex:policy-partycollection ;
+ex:policy-legalentity a odrl:Policy ;
+    odrl:uid ex:policy-legalentity ;
     odrl:profile dpv-odrl: ;
     odrl:permission [
         odrl:assigner ex:DataSubject ;
@@ -14,12 +15,8 @@ ex:policy-partycollection a odrl:Policy ;
             a odrl:PartyCollection ;
             odrl:source ex:entities ;
             odrl:refinement [
-                odrl:leftOperand dpv-odrl:Entity ;
+                odrl:leftOperand dpv-odrl:LegalEntity ;
                 odrl:operator odrl:isA ;
-                odrl:rightOperand dpv:AcademicScientificOrganisation ] ] ;
+                odrl:rightOperand eu-dga:DISP ] ] ;
         odrl:target ex:asset ;
-        odrl:action dpv-odrl:Use ;
-        odrl:constraint [
-            odrl:leftOperand dpv-odrl:Purpose ;
-            odrl:operator odrl:isA ;
-            odrl:rightOperand dpv:PaymentManagement ] ] .
+        odrl:action dpv-odrl:Use ] .
