@@ -85,7 +85,7 @@ are mapped into one or more of the previously mentioned ODRL constructs.
 \begin{figure}[ht]
     \centering
     \includegraphics[width=\linewidth]{overview_cropped.pdf}
-    \caption{Overview of DPV-ODRL mapping: the inner layer groups the terms by taxonomy, the middle layer contains the mapped DPV terms, and the outer layer contains the mapping to ODRL constructs.}
+    \caption{Overview of DPV-ODRL mapping: the inner layer groups the terms by taxonomy, the middle layer contains the mapped DPV terms, and the outer layer contains the mapping to ODRL constructs. The following labels were used to represent ODRL constructs: `Ac' represents Action concepts, `As' Asset concepts, `LO' Left Operands, `P' Party concepts, `Po' Policy types, and `R' Rules. Terms from DPV's extensions, e.g., Tech, PD, and AI, were also included in the mapping.}
     \label{fig:mapping}
 \end{figure}
 
@@ -125,7 +125,6 @@ a \texttt{dpv:Entity} as the right operand.
 dpv-odrl:Recipient a odrl:Party, odrl:LeftOperand, skos:Concept ;
 	skos:exactMatch dpv:Recipient ;
 	skos:broader odrl:recipient .
-    # add scope, e.g., which operators and right operand should be used
 \end{lstlisting}
 \end{scriptsize}
 
@@ -281,5 +280,44 @@ dpv-odrl:NDA a rdfs:Class, skos:Concept ;
         dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
         dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
         dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
+\end{lstlisting}
+\end{scriptsize}
+
+\subsection{Usage of ODRL Operators}
+\label{sec:operators}
+
+Besides specifying the mapping
+between DPV and ODRL,
+when defining the DPV-ODRL profile,
+the usage of ODRL operators for
+each left operand should also be
+included in the left operand specification.
+For this,
+the \texttt{skos:note} property
+can be used to associate a certain left operand
+with a note on the operators that must be used
+with said left operand.
+Listing~\ref{lst:note} provides an example
+of such a specification.
+In this case,
+the \texttt{dpv-odrl:LegalBasis} left operand
+can only be used with the
+\texttt{odrl:isA},
+\texttt{odrl:eq}, and
+\texttt{odrl:neq} operators.
+Section~\ref{sec:shacl} will provide details
+on how to implement this specification.
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Note specification for the usage of operators with the Legal Basis left operand., label=lst:note]
+dpv-odrl:LegalBasis a odrl:LeftOperand, skos:Concept ;
+	skos:exactMatch dpv:LegalBasis ;
+  	skos:example "A legal basis can be consent, legitimate interest, contract performance or jurisdiction-specific legal basis such as the ones provided in GDPR Article 6."@en ;
+  	skos:note '''Only the odrl:isA, odrl:eq and odrl:neq MUST be used. Example: 
+		ex:legalBasisConstraint a odrl:Constraint ;
+			odrl:leftOperand dpv-odrl:LegalBasis ;
+			odrl:operator odrl:isA ;
+			odrl:rightOperand dpv:Consent .
+		indicates that the legal basis for the processing should be an instance of dpv:Consent.'''@en .
 \end{lstlisting}
 \end{scriptsize}

@@ -109,7 +109,59 @@ ex:policy-right-erasure-justification a odrl:Agreement ;
 Finally,
 we provide a policy catalog at
 \url{https://github.com/besteves4/SDS2026-DPV-ODRL-mapping}
-that contains an example policy for each mapped left operand.
+that contains an example policy for each mapped concept.
 
-\subsection{SHACL shapes to validate mapping}
+\subsection{SHACL Shapes for Constraint Validation}
 \label{sec:shacl}
+
+Beyond specifying examples,
+the guidance document
+recommends the usage of SHACL\footnote{
+    \url{https://www.w3.org/TR/shacl/}
+} shapes
+to validate DPV-ODRL-based policies.
+While such shapes already exist
+to validate core ODRL constructs\footnote{See \url{
+    https://github.com/oeg-upm/licensius/blob/master/odrlapi/src/main/resources/shapes.ttl}},
+the same exercise is needed for
+the policies described in this work,
+in particular to validate the usage of constraints,
+as previously discussed in Section~\ref{sec:operators}.
+In this context,
+the ODRL vocabulary has a set of 12
+defined constraint operators to express
+the relation between left and right operands.
+Given that multiple operators
+can be used to restrict this relation,
+the left operand and operator usage
+should be refined for each left operand,
+e.g., the \texttt{odrl:isA} operator
+should not be used with the
+\texttt{dpv-odrl:Frequency} left operand.
+Listing~\ref{lst:shacl}
+provides a template 
+for a SPARQL-based SHACL constraint
+that can be used to
+detect the usage of an invalid operator
+for a given left operand.
+
+\pagebreak
+
+\begin{scriptsize}
+\begin{lstlisting}[language=turtle, caption=Template shape to detect the usage of an invalid operator for a given left operand., label=lst:shacl]
+ex:ConstraintShapeTemplate a sh:NodeShape ;
+    sh:targetClass odrl:Constraint ;
+    sh:sparql [
+        a sh:SPARQLConstraint ;
+        sh:message "Invalid operator for given left operand." ;
+        sh:prefixes odrl: ;
+        sh:select """
+            SELECT $this WHERE {
+                $this odrl:leftOperand <LEFT_OPERAND> .
+                $this odrl:operator ?op .
+                FILTER(?op NOT IN (<ALLOWED_OPERATORS>))
+            }
+        """ ;
+    ] .
+\end{lstlisting}
+\end{scriptsize}
