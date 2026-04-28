@@ -1,8 +1,38 @@
 \subsection{Limitations}
 \label{sec:limitations}
 
-% The paper provides examples, guidance, and a SHACL-based validation template, but lacks a systematic implementation and evaluation in realistic dataspace settings, which is mentioned as future work.
+While this work provides a structured and
+comprehensive mapping between DPV and ODRL,
+several limitations must be acknowledged.
 
-% The paper claims comprehensive mapping, but the contribution would be stronger with quantitative evidence, for example on the number of covered DPV classes and the completeness of individual taxonomies.
-
-% The paper presents illustrative policy snippets, but does not provide validation in dataspace scenarios.
+First, the contribution primarily focuses on
+conceptual alignment and specification artefacts,
+including example policies and a SHACL-based validation template.
+However,
+it does not yet include a systematic implementation and evaluation
+within realistic data space environments.
+As such, the proposed profile has not been empirically assessed
+in operational settings involving interoperable policy engines
+or real-world data sharing scenarios.
+Building on the latter,
+the policy examples provided throughout the article
+serve an illustrative purpose
+but are not validated within concrete data space scenarios.
+While they demonstrate how DPV concepts can be embedded within ODRL policies,
+they do not account for challenges that may arise in real deployments,
+such as policy conflicts, negotiation workflows,
+or integration with existing enforcement mechanisms.
+As a result,
+the applicability of these examples to complex,
+multi-party data sharing environments remains to be validated.
+Finally,
+it is important to consider that DPV is an actively evolving vocabulary
+that is continuously extended to cover new data-related regulations,
+sector-specific requirements, and emerging technologies.
+While this extensibility is a strength,
+it also introduces a moving target for the proposed mapping.
+Hence,
+changes or additions to DPV~--~such as
+new legal concepts, jurisdictions, or domain-specific extensions~--~may
+require ongoing updates to the DPV-ODRL alignment
+to maintain completeness and consistency.
