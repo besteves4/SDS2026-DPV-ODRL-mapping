@@ -5,7 +5,7 @@ In this section,
 we provide an overview of the legal framework
 that must be tackled in data spaces,
 as well as a description of ODRL and DPV
-and how they have been used so far
+and how they have been used
 to tackle these regulatory requirements.
 
 \paragraph{Regulatory Compliance in Data Spaces}
@@ -17,11 +17,19 @@ enforcement of access and usage control.
 One particular area of focus is
 data-related legislation,
 in particular the
-General Data Protection Regulation (GDPR)~\cite{gdpr},
-the Data Governance Act (DGA)~\cite{dga},
-and the Data Act~\cite{data_act}, as
-these regulatory instruments introduced by the European Commission
-collectively shape the legal environment
+General Data Protection Regulation (GDPR)~\cite{gdpr}
+regarding the processing of personal data,
+the Data Governance Act (DGA)~\cite{dga}
+regarding a framework to facilitate data sharing,
+and the Data Act~\cite{data_act}
+which establishes harmonised rules for data exchange.\footnote{
+The DGA and the Data Act have been proposed to be merged
+into a single regulation under the Digital Omnibus series
+of proposals. For this work, we consider them as distinct
+laws based on their current status.
+}
+These regulatory instruments
+collectively shape the legal environment in EU
 for data sharing and governance in data spaces.
 The GDPR establishes the foundational framework
 for the protection of personal data,
@@ -71,9 +79,25 @@ competition law~\cite{data_spaces_support_centre_summary_2026}.
 
 Besides being the \emph{de facto} standard
 in data spaces for the expression of usage control policies,
-ODRL was selected because it is a W3C standard specifically designed to represent machine-readable policies and rules governing the use of digital assets. 
-At the core of the ODRL model~\cite{iannella_odrl_2018} is the Policy, which groups one or more Rules that define permissions, prohibitions, or obligations. Each rule specifies an Action performed by a Party over an Asset, and can be further refined using Constraints that restrict when or how the action may occur, expressed through left operands, operators, and right operands. Rules may also include Duties, representing additional actions that must be fulfilled when a rule is exercised. This model allows policies such as offers, agreements, or requests to be expressed in a machine-readable and interoperable manner.
-However, since ODRL is domain-agnostic, DPV~\cite{pandit_data_2024} can be used alongside it to provide a controlled vocabulary of privacy and data protection concepts~---~such as legal bases, legal roles, and purposes for processing data~---~allowing policies to incorporate legally relevant semantics and regulatory concepts (e.g., from the GDPR).
+ODRL was selected since it is a W3C standard
+specifically designed to represent machine-readable rules
+governing the use of digital assets. 
+At the core of the ODRL model~\cite{iannella_odrl_2018} is the \texttt{Policy} concept,
+which groups one or more \texttt{Rules} that define permissions, prohibitions, or obligations.
+Each rule specifies an \texttt{Action} performed by a \texttt{Party} over an \texttt{Asset},
+and can be further refined using \texttt{Constraints}
+that restrict when or how the action may occur,
+expressed through left operands, operators, and right operands.
+Rules may also include \texttt{Duties},
+representing additional actions that must be fulfilled when a rule is exercised.
+This model allows policies such as offers, agreements, or requests
+to be expressed in a machine-readable and interoperable manner.
+However, since ODRL is both jurisdiction- and domain-agnostic,
+DPV~\cite{pandit_data_2024} can be used alongside it
+to provide a controlled vocabulary of legal concepts~---~such as
+legal bases, legal roles, and purposes for processing data
+related to privacy and data protection~---~allowing policies to
+incorporate legally relevant semantics and regulatory concepts (e.g., from the GDPR).
 In this context,
 DPV is the \emph{de facto} standard for 
 the representation of legal requirements
@@ -81,7 +105,17 @@ related to data protection,
 as it is an open source solution
 that provides the most complete set of taxonomies
 for this domain~\cite{esteves_analysis_2024}.
-DPV's core specification include taxonomies describing personal data categories, processing operations, and purposes for data use, as well as entities and roles such as data controllers, processors, and data subjects. Additional taxonomies describe legal concepts (e.g., laws and legal bases), technical and organisational measures, risks and risk mitigation measures, locations and jurisdictions, technologies and AI systems, and sector-specific contexts. Together, these vocabularies enable the interoperable representation of information about data processing activities and compliance requirements, which can then be incorporated into policy languages such as ODRL.
+DPV's core specification include taxonomies describing personal data categories,
+processing operations, and purposes for data use,
+as well as entities and roles such as data controllers, processors, and data subjects.
+Additional taxonomies describe legal concepts (e.g., laws and legal bases),
+technical and organisational measures, risks and risk mitigation measures,
+locations and jurisdictions, technologies and AI systems,
+and sector-specific contexts.
+Together,
+these vocabularies enable the interoperable representation of information
+about data processing activities and compliance requirements,
+which can then be incorporated into policy languages such as ODRL.
 
 Previous ODRL profiles have looked at the combined usage of ODRL and
 DPV~\cite{esteves_odrl_2021,pandit_enhancing_2024,golpayegani_aiup_2024},
