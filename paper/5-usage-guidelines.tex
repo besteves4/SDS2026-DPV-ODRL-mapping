@@ -65,7 +65,7 @@ ex:policy-assetcollection a odrl:Policy ;
             odrl:refinement [
                 odrl:leftOperand dpv-odrl:PersonalData ;
                 odrl:operator odrl:isA ;
-                odrl:rightOperand pd:HealthRecord ]] ;
+                odrl:rightOperand pd:HealthRecord ] ] ;
         odrl:assigner ex:data-subject ;
         odrl:action dpv-odrl:Use ] .
 \end{lstlisting}
@@ -144,8 +144,6 @@ for a SPARQL-based SHACL constraint
 that can be used to
 detect the usage of an invalid operator
 for a given left operand.
-
-\pagebreak
 
 \begin{scriptsize}
 \begin{lstlisting}[language=turtle, caption=Template shape to detect the usage of an invalid operator for a given left operand., label=lst:shacl]
