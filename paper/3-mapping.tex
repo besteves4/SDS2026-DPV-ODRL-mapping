@@ -31,7 +31,10 @@ RDF and RDFS\footnote{
     \url{http://www.w3.org/2000/01/rdf-schema\#}}, and
 OWL\footnote{
     \url{http://www.w3.org/2002/07/owl\#}}.
-The following alignment strategies were considered:
+The following alignment strategies were considered, with
+Table~\ref{tab:mapping} providing an overview of these strategies,
+the semantic property used for the mapping,
+and examples.
 \begin{itemize}
     \item \textbf{Instantiation}: A \texttt{dpv-odrl} class is instantiated as an ODRL class
     \item \textbf{Specialisation}: One concept is more specific than the other
@@ -41,9 +44,6 @@ The following alignment strategies were considered:
     \item \textbf{Association}: Concepts are related but not hierarchically
     \item \textbf{Disjointness}: Mutually exclusive concepts
 \end{itemize}
-Table~\ref{tab:mapping} provides an overview of these strategies,
-the semantic property used for the mapping,
-and examples.
 
 \begin{table}[ht]
     \centering
@@ -226,6 +226,7 @@ their utility to restrict ODRL policies:
 \end{itemize}
 A detailed list of these mappings
 is available at \url{https://dev.dpvcg.org/mappings/odrl}
+(as part of the DPVCG's ongoing-development resource)
 and can be observed in Figure~\ref{fig:mapping}.
 
 \begin{scriptsize}
@@ -279,7 +280,7 @@ dpv-odrl:NDA a rdfs:Class, skos:Concept ;
         dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
         dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
         dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
-        dpv-odrl:ConfidentialityAgreement, dpv-odrl:NDA, dpv-odrl:StatisticalConfidentialityAgreement .
+        dpv-odrl:ConfidentialityAgreement, dpv-odrl:StatisticalConfidentialityAgreement .
 \end{lstlisting}
 \end{scriptsize}
 
