@@ -14,19 +14,54 @@
 \usepackage{footmisc}
 \definecolor{MyLightGray}{rgb}{0.95, 0.95, 0.96}
 
-\lstdefinelanguage{turtle}
-{
-    columns=fullflexible,
-    keywordstyle=\color{red},
-    morekeywords={@prefix,@base,@forSome,@forAll,@keywords},
+% \lstdefinelanguage{turtle}
+% {
+%     columns=fullflexible,
+%     keywordstyle=\color{red},
+%     morekeywords={@prefix,@base,@forSome,@forAll,@keywords},
+%     morecomment=[l]{\#},
+%     tabsize=4,
+%     alsoletter={-?}, % allowed in names
+%     morecomment=[s][\color{blue}]{<}{>},
+%     basicstyle=\ttfamily\color{black},
+%     %numberstyle=\color{black},
+%     morestring=[b][\color{black}]\",
+%     backgroundcolor=\color{MyLightGray},
+% }
+
+\usepackage{xcolor}
+
+\lstdefinelanguage{Turtle}{
+    morekeywords={
+        a
+    },
+    sensitive=true,
     morecomment=[l]{\#},
-    tabsize=4,
-    alsoletter={-?}, % allowed in names
-    morecomment=[s][\color{blue}]{<}{>},
-    basicstyle=\ttfamily\color{black},
-    %numberstyle=\color{black},
-    morestring=[b][\color{black}]\",
-    backgroundcolor=\color{MyLightGray},
+    morestring=[b]",
+}
+
+\lstset{
+    language=Turtle,
+    basicstyle=\ttfamily\scriptsize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{green!50!black},
+    breaklines=true,
+    columns=fullflexible,
+    captionpos=b,
+    alsoletter={-,:},
+    literate=
+        {dpv:}{{{\color{purple}dpv:}}}1
+        {dpv-odrl:}{{{\color{purple}dpv-odrl:}}}1
+        {eu-gdpr:}{{{\color{purple}eu-gdpr:}}}1
+        {odrl:}{{{\color{purple}odrl:}}}1
+        {ex:}{{{\color{purple}ex:}}}1
+        {skos:}{{{\color{purple}skos:}}}1
+        {rdfs:}{{{\color{purple}rdfs:}}}1
+        {owl:}{{{\color{purple}owl:}}}1
+        {pd:}{{{\color{purple}pd:}}}1
+        {sh:}{{{\color{purple}sh:}}}1
+        {@en}{{{\color{orange}@en}}}1
 }
 
 \usepackage{amsmath}

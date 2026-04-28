@@ -233,7 +233,7 @@ and can be observed in Figure~\ref{fig:mapping}.
 \begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the Duration concept.,  label=lst:duration]
 dpv-odrl:Duration a odrl:LeftOperand, skos:Concept ;
     skos:exactMatch dpv:Duration ;
-	skos:related odrl:elapsedTime, odrl:count .
+    skos:related odrl:elapsedTime, odrl:count .
 \end{lstlisting}
 \end{scriptsize}
 
@@ -275,8 +275,8 @@ dpv-odrl:Obligation skos:exactMatch dpv:Obligation ;
 \begin{lstlisting}[language=turtle, caption=DPV-ODRL mapping for the NDA concept., label=lst:policy]
 dpv-odrl:NDA a rdfs:Class, skos:Concept ;
     skos:exactMatch dpv:NDA ;
-	rdfs:subClassOf odrl:Policy ;
-	owl:disjointWith odrl:Agreement, odrl:Offer, odrl:Privacy, odrl:Request, odrl:Ticket, odrl:Assertion,
+    rdfs:subClassOf odrl:Policy ;
+    owl:disjointWith odrl:Agreement, odrl:Offer, odrl:Privacy, odrl:Request, odrl:Ticket, odrl:Assertion,
         dpv-odrl:ContractConfidentialityClause, dpv-odrl:ContractDisputeResolutionClause,
         dpv-odrl:ContractJurisdictionClause, dpv-odrl:ContractTerminationClause,
         dpv-odrl:TermsOfService, dpv-odrl:DataHandlingClause, dpv-odrl:LegalAgreement,
@@ -314,11 +314,11 @@ on how to implement this specification.
 dpv-odrl:LegalBasis a odrl:LeftOperand, skos:Concept ;
 	skos:exactMatch dpv:LegalBasis ;
   	skos:example "A legal basis can be consent, legitimate interest, contract performance or jurisdiction-specific legal basis such as the ones provided in GDPR Article 6."@en ;
-  	skos:note '''Only the odrl:isA, odrl:eq and odrl:neq MUST be used. Example: 
-		ex:legalBasisConstraint a odrl:Constraint ;
-			odrl:leftOperand dpv-odrl:LegalBasis ;
-			odrl:operator odrl:isA ;
-			odrl:rightOperand dpv:Consent .
-		indicates that the legal basis for the processing should be an instance of dpv:Consent.'''@en .
+  	skos:note """Only the odrl:isA, odrl:eq and odrl:neq MUST be used. Example: 
+        ex:legalBasisConstraint a odrl:Constraint ;
+            odrl:leftOperand dpv-odrl:LegalBasis ;
+            odrl:operator odrl:isA ;
+            odrl:rightOperand dpv:Consent .
+        indicates that the legal basis for the processing should be an instance of dpv:Consent."""@en .
 \end{lstlisting}
 \end{scriptsize}
